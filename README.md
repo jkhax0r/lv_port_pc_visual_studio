@@ -1,4 +1,5 @@
-﻿# Visual Studio simulator project for LVGL embedded GUI Library
+﻿
+# Visual Studio simulator project for LVGL embedded GUI Library
 
 ![Screenshot](Screenshot.png)
 
