@@ -26,6 +26,8 @@
 #include "lvgl/demos/lv_demos.h"
 #include "lv_drivers/win32drv/win32drv.h"
 
+#include "lcd_ui.h"
+
 #if _MSC_VER >= 1200
 // Restore compilation warnings.
 #pragma warning(pop)
@@ -33,13 +35,29 @@
 
 #include <stdio.h>
 
+static void bl_ramp_duration_to_brightness(uint16_t _target_brightness, uint16_t _ramp_duration_ms, void (*_ramp_done_cb)(void))
+{    
+    _ramp_done_cb();
+}
+
+static const lcd_ui_platform_driver_t platform_driver = {
+    .bl_ramp_duration_to_brightness = &bl_ramp_duration_to_brightness,
+    .shutdown_requested = NULL,
+
+    .get_last_update = NULL,
+    .get_last_update_info = NULL,
+    .get_last_update_time_text = NULL,
+};
+
+
+
 bool single_display_mode_initialization()
 {
     if (!lv_win32_init(
         GetModuleHandleW(NULL),
         SW_SHOW,
-        800,
-        480,
+        240,
+        240,
         LoadIconW(GetModuleHandleW(NULL), MAKEINTRESOURCE(IDI_LVGL))))
     {
         return false;
@@ -66,8 +84,8 @@ unsigned int __stdcall lv_win32_window_thread_entrypoint(
     HINSTANCE instance_handle = GetModuleHandleW(NULL);
     int show_window_mode = SW_SHOW;
     HICON icon_handle = LoadIconW(instance_handle, MAKEINTRESOURCE(IDI_LVGL));
-    lv_coord_t hor_res = 800;
-    lv_coord_t ver_res = 450;
+    lv_coord_t hor_res = 240;
+    lv_coord_t ver_res = 240;
 
     wchar_t window_title[256];
     memset(window_title, 0, sizeof(window_title));
@@ -142,7 +160,8 @@ bool multiple_display_mode_initialization()
     {
         lv_win32_pointer_device_object = context->mouse_device_object;
         lv_win32_keypad_device_object = context->keyboard_device_object;
-        lv_win32_encoder_device_object = context->mousewheel_device_object;
+        //lv_win32_encoder_device_object = context->mousewheel_device_object;
+        lv_win32_encoder_device_object = context->mopeka_device_object;
     }
 
     lv_win32_add_all_input_devices_to_group(NULL);
@@ -312,8 +331,11 @@ int main()
     // ----------------------------------
     // Demos from lv_examples
     // ----------------------------------
+    
+    lcd_ui_early_init(&platform_driver);
+    lcd_ui_late_init();
 
-    lv_demo_widgets();           // ok
+    //lv_demo_widgets();           // ok
     //lv_demo_benchmark();
     // lv_demo_keypad_encoder();    // ok
     // lv_demo_music();             // removed from repository
