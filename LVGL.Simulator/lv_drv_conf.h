@@ -160,7 +160,7 @@
 
 #if USE_WIN32DRV
 /* Scale window by this factor (useful when simulating small screens) */
-#  define WIN32DRV_MONITOR_ZOOM        1
+#  define WIN32DRV_MONITOR_ZOOM        2
 #endif
 
 /*----------------------------------------

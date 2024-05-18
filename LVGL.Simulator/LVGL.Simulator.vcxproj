@@ -9,6 +9,7 @@
     <MileProjectType>ConsoleApplication</MileProjectType>
     <MileProjectManifestFile>LVGL.Simulator.manifest</MileProjectManifestFile>
     <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)'=='Debug'">
     <SupportLTL>false</SupportLTL>
@@ -23,8 +24,10 @@
       <WarningLevel>Level3</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;LV_CONF_INCLUDE_SIMPLE;PC_SIMULATOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization Condition="'$(Configuration)'=='Release'">MinSpace</Optimization>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\WORKING\nrf52_lcddisplay\simulator\lv_port_pc_visual_studio\LVGL.Simulator\lvgl;C:\WORKING\nrf52_lcddisplay\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -260,6 +263,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)lv_drivers\wayland\wayland.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lv_drivers\win32drv\win32drv.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)lv_drivers\win_drv.h" />
+    <ClInclude Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui.h" />
+    <ClInclude Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui_events.h" />
+    <ClInclude Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui_helpers.h" />
     <ClInclude Include="lv_conf.h" />
   </ItemGroup>
   <ItemGroup>
@@ -720,7 +726,75 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)lv_drivers\wayland\wayland.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)lv_drivers\win32drv\win32drv.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)lv_drivers\win_drv.c" />
-    <ClCompile Include="LVGL.Simulator.cpp" />
+    <ClCompile Include="..\..\..\src\lcd_ui.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\components\ui_comp_hook.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_ArialRoundBold20.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_ArialRoundBold74.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_ArialRoundBold78.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_MontserratLimited12.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1043474496.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1071556758.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1074992221.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1231980258.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1641025599.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1653426243.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1822556165.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_188720663.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_215388684.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_362681197.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_388751602.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_514954044.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_517473846.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_709822495.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_798215073.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_804425896.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_512x512_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_green_tank_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_lpg_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bg3_dither_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bg3_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bin_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bin_512x512_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bluetooth_icon2_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bluetooth_logo_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_configuration_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_delete_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_delete_512x512_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dotdotdot54x12_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_10x10_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_12x12_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_14x14_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_15x15_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_20x20_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_droplet_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_forward_lpg_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_gear_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_mopeka_logo_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_ruler_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_settings2_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_shadow_dithered_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_shadow_mask_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_shadow_test2_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_signal_4_24x18_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_signal_4_32x24_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_signal_4_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_sync_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_sync_512x512_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_sync_sensor_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_tank_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_tank_shape_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_tank_size_50x50_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_vertical_gradient_png.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\screens\ui_HomeScreen.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\screens\ui_RightScreen.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\screens\ui_SettingsScreen.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\screens\ui_SplashScreen.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\screens\ui_TankSettings.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui_events.c" />
+    <ClCompile Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui_helpers.c" />
+    <ClCompile Include="LVGL.Simulator.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LVGL.Simulator.rc" />
@@ -2065,6 +2139,69 @@
     <None Include="$(MSBuildThisFileDirectory)lv_drivers\wayland\.gitignore" />
     <None Include="$(MSBuildThisFileDirectory)lv_drivers\wayland\CMakeLists.txt" />
     <None Include="$(MSBuildThisFileDirectory)lv_drivers\wayland\README.md" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\CMakeLists.txt" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\filelist.txt" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_ArialRoundBold20.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_ArialRoundBold74.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_ArialRoundBold78.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\fonts\ui_font_MontserratLimited12.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1043474496.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1071556758.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1074992221.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1231980258.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1641025599.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1653426243.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_1822556165.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_188720663.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_215388684.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_362681197.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_388751602.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_514954044.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_517473846.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_709822495.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_798215073.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_804425896.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_512x512_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_green_tank_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_back_lpg_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bg3_dither_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bg3_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bin_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bin_512x512_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bluetooth_icon2_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_bluetooth_logo_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_configuration_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_delete_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_delete_512x512_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dotdotdot54x12_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_10x10_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_12x12_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_14x14_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_15x15_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_dot_20x20_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_droplet_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_forward_lpg_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_gear_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_mopeka_logo_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_ruler_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_settings2_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_shadow_dithered_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_shadow_mask_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_shadow_test2_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_signal_4_24x18_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_signal_4_32x24_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_signal_4_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_sync_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_sync_512x512_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_sync_sensor_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_tank_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_tank_shape_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_tank_size_50x50_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\images\ui_img_vertical_gradient_png.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui_events.o" />
+    <None Include="C:\WORKING\nrf52_lcddisplay\src\ui\ui_helpers.o" />
     <None Include="freetype.props" />
   </ItemGroup>
   <Import Project="Mile.Project.Windows.Legacy\Mile.Project.Cpp.targets" />

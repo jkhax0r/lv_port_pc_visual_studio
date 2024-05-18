@@ -1,6 +1,7 @@
 ﻿using Microsoft.Build.Construction;
 using Mile.Project.Helpers;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LvglProjectFileUpdater
 {
@@ -52,11 +53,21 @@ namespace LvglProjectFileUpdater
 
         private static void EnumerateFolder(
             string Path,
-            bool ForceInOthers = false)
+            bool ForceInOthers = false,
+            string strip_prefix = "")        
         {
             DirectoryInfo Folder = new DirectoryInfo(Path);
 
-            FilterNames.Add(Folder.FullName);
+            if (!strip_prefix.Equals(""))
+            {
+                string r = Path.Replace(strip_prefix, "");
+                FilterNames.Add(r);
+            } else
+            {
+                FilterNames.Add(Path);
+            }
+
+                        
 
             foreach (var Item in Folder.GetDirectories())
             {
@@ -71,13 +82,19 @@ namespace LvglProjectFileUpdater
                 }
                 EnumerateFolder(
                     Item.FullName,
-                    ForceInOthers || CurrentForceInOthers);
+                    ForceInOthers || CurrentForceInOthers,
+                    strip_prefix);
             }
 
             foreach (var Item in Folder.GetFiles())
             {
                 (string Target, string Filter) Current =
                     (Item.FullName, Item.Directory.FullName);
+
+                if (!strip_prefix.Equals(""))
+                {
+                    Current.Filter = Current.Filter.Replace(strip_prefix, "");
+                }
 
                 if (ForceInOthers)
                 {
@@ -111,6 +128,16 @@ namespace LvglProjectFileUpdater
             EnumerateFolder(RootPath + @"freetype");
             EnumerateFolder(RootPath + @"lvgl");
             EnumerateFolder(RootPath + @"lv_drivers");
+
+            string src_folder = Path.GetFullPath(RootPath + @"..\..\..\src\");
+            string ui_folder = Path.GetFullPath(src_folder + @"ui");
+            DirectoryInfo Folder = new DirectoryInfo(ui_folder);
+            
+
+
+
+            EnumerateFolder(ui_folder, false, src_folder);
+
 
             List<string> NewFilterNames = new List<string>();
             List<(string, string)> NewHeaderNames = new List<(string, string)>();
